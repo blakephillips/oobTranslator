@@ -24,10 +24,12 @@ namespace oobTranslator
     {
         SpeechSynthesizer reader = new SpeechSynthesizer();
         oobClass oob = new oobClass();
+        bool isReading = false;
        
         public MainWindow()
         {
             InitializeComponent();
+            reader.SpeakCompleted += OnDoneSpeaking;
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)
@@ -37,7 +39,22 @@ namespace oobTranslator
 
         private void ReaderClick(object sender, RoutedEventArgs e)
         {
-            reader.SpeakAsync(txtOutput.Text);
+            if (isReading == false)
+            {
+                reader.SpeakAsync(txtOutput.Text);
+                isReading = true;
+            } else
+            {
+                reader.SpeakAsyncCancelAll();
+                OnDoneSpeaking(this, new EventArgs());
+            }
+            btnReadOob.Content = "Stop Reading OOb";
+        }
+
+        private void OnDoneSpeaking(object sender, EventArgs e)
+        {
+            isReading = false;
+            btnReadOob.Content = "Read Oob";
         }
     }
 }
