@@ -45,6 +45,7 @@ namespace oobTranslator
                 isReading = true;
             } else
             {
+                chkLoop.IsChecked = false;
                 reader.SpeakAsyncCancelAll();
                 OnDoneSpeaking(this, new EventArgs());
             }
@@ -53,8 +54,14 @@ namespace oobTranslator
 
         private void OnDoneSpeaking(object sender, EventArgs e)
         {
-            isReading = false;
-            btnReadOob.Content = "Read Oob";
+            if (chkLoop.IsChecked == true)
+            {
+                reader.SpeakAsync(txtOutput.Text);
+            } else
+            {
+                isReading = false;
+                btnReadOob.Content = "Read Oob";
+            }
         }
     }
 }

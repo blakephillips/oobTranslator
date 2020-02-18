@@ -16,6 +16,7 @@
             <RowDefinition Height="20*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Content="Input" Name="lblInput"></Label>
+        <CheckBox Content="Loop" Name="chkLoop" HorizontalAlignment="Center"></CheckBox>
         <Label Content="Oobified Output:" Grid.Column="2" Name="lblOutput"></Label>
 
         <TextBox Text="" Name="txtInput" Margin="15,30,15,15" TextChanged="TextChanged" TextWrapping="Wrap" AcceptsReturn="True"></TextBox>
